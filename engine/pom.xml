@@ -114,7 +114,6 @@
         <module>legacy-functions</module>
         <module>wizard-core</module>
         <module>demo</module>
-        <module>testcases</module>
         <module>tools</module>
       </modules>
     </profile>
@@ -144,7 +143,6 @@
         <module>legacy-functions</module>
         <module>wizard-core</module>
         <module>demo</module>
-        <module>testcases</module>
         <module>tools</module>
       </modules>
     </profile>
