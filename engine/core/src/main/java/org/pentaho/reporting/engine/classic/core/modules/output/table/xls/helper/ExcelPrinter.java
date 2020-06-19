@@ -212,8 +212,8 @@ public class ExcelPrinter extends ExcelPrinterBase {
     if ( rowSpan <= 1 && columnSpan <= 1 ) {
       return;
     }
-
-    sheet.addMergedRegion( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
+    //修改为addMergedRegionUnsafe，提升写的效率
+    sheet.addMergedRegionUnsafe( new CellRangeAddress( row, ( row + rowSpan - 1 ), col, ( col + columnSpan - 1 ) ) );
     final int rectX = rectangle.getX1();
     final int rectY = rectangle.getY1();
 

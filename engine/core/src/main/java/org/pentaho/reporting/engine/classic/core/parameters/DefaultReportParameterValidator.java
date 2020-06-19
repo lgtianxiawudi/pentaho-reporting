@@ -262,6 +262,8 @@ public class DefaultReportParameterValidator implements ReportParameterValidator
   private ValidationMessage computeValidListValue( final ListParameter listParameter,
       final ParameterContext parameterContext, final Class parameterType, final Object[] values, final Locale locale )
     throws ReportDataFactoryException {
+      //just only search once
+    final ParameterValues parameterValues = listParameter.getValues( parameterContext );
     for ( int i = 0; i < values.length; i++ ) {
       Object value = values[i];
       if ( value != null ) {
@@ -280,7 +282,6 @@ public class DefaultReportParameterValidator implements ReportParameterValidator
       }
 
       try {
-        final ParameterValues parameterValues = listParameter.getValues( parameterContext );
         final boolean found = isValueValid( parameterValues, value );
         if ( found == false ) {
           logger.warn( "Parameter validation error: No such value in the result for '" + listParameter.getName()
@@ -288,8 +289,6 @@ public class DefaultReportParameterValidator implements ReportParameterValidator
           return new ValidationMessage( Messages.getInstance( locale ).getString(
               "DefaultReportParameterValidator.ParameterIsInvalidValue" ) );
         }
-      } catch ( ReportDataFactoryException e ) {
-        throw e;
       } catch ( Throwable e ) {
         logger.warn( "Unexpected Parameter validation error", e );
         // overly broad catch, I know, but some creepy code throws ClassNotDefErrors and such around ..
